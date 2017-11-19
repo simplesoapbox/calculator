@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Soapbox Calculator</title>
+    <script src="/public/js/jquery-3.2.1.min.js"></script>
+    <script src="/public/js/main.js"></script>
+</head>
+<body>
+<script>
+    $(document).ready(function () {
+        clearAll();
+        $('#newSiteOptions').hide();
+        $('#newsletterOptions').hide();
+        $('#dataOptions').hide();
+        $('#socialOptions').hide();
+    });
+
+</script>
+<form action="/" method="POST">
+    <!--Client Name-->
+    Client Name: <input name="clientName" id="clientName">
+    <br><br>
+    <table width="75%">
+        <tr>
+            <!--Websites-->
+            <td>
+                Websites:
+            </td>
+            <td>
+                <select id="websites" name="websites"></select>
+                <input type="button" id="websiteEdit" name="websiteEdit" value="Edit" onclick="editSite()"/>
+                <input type="button" id="websiteDelete" name="websiteDelete" value="Delete" onclick="deleteSite()"/>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="button" id="newSite" name="newSite" value="Add new site" onclick="showAddSiteOptions()"/>
+            </td>
+        </tr>
+        <!--New Website-->
+        <tr>
+            <td></td>
+            <td>
+                <div id="newSiteOptions">
+                    <table>
+                        <tr>
+                            <td>
+                                Name:
+                            </td>
+                            <td>
+                                <input id="siteName">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Needs design?
+                            </td>
+                            <td>
+                                <input type="radio" id="designYes" name="designRadio" value="yes">Yes
+                                <input type="radio" id="designNo" name="designRadio" value="no">No
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Apps?
+                            </td>
+                            <td>
+                                <select id="apps" multiple>
+                                    <option name="wooCommerce" value="wooCommerce">WooCommerce</option>
+                                    <option name="calendar" value="calendar">Calendar</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Number of pages:
+                            </td>
+                            <td>
+                                <input type=number id="numPages">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="button" id="cancelAddSite" value="Cancel" onclick="cancelSiteAdd()"/>
+                                <input type="button" id="addSite" value="Add Site" onclick="addNewSite()"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Newsletter:
+            </td>
+            <td>
+                <input type="radio" name="newsletter" value="yes" onchange="showNewsletterOptions(true)">Yes
+                <input type="radio" name="newsletter" value="no" onchange="showNewsletterOptions(false)">No
+                <input type="button" id="newsletterEdit" value="Edit" onclick="showNewsletterOptions(true)"/>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <div id="newsletterOptions">
+                    <table>
+                        <tr>
+                            <td>
+                                Number of recipients: <input name="numNewsletter" id="numNewsletter" type="number"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Number of emails/mo: <input name="numEmailsMonth" id="numEmailsMonth" type="number"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Additional work:
+                                <select name="newsletterAdditionalWork" id="newsletterAdditionalWork" multiple>
+                                    <option name="generate" value="generate">Generate</option>
+                                    <option name="generate" value="manage">Manage</option>
+                                    <option name="generate" value="analysis">Analysis</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="button" id="hideNewsletter" value="Hide" onclick="hideNewsletterOptions()"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Data Management:
+            </td>
+            <td>
+                <input type="radio" name="dataManagement" value="yes" onchange="showDataOptions(true)">Yes
+                <input type="radio" name="dataManagement" value="no" onchange="showDataOptions(false)">No
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <div id="dataOptions">
+                    <table>
+                        <tr>
+                            <td>
+                                Number of members:
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input id="numMembers" name="numMembers" type="number"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Social Media:
+            </td>
+            <td>
+                <select id="socialMedia" name="socialMedia"></select>
+                <input type="button" id="socialMediaEdit" name="socialMediaEdit" value="Edit"/>
+                <input type="button" id="socialMediaDelete" name="socialMediaDelete" value="Delete"/>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="button" id="newSocial" name="newSocial" value="Add new social media" onclick="showSocialOptions()"/>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <div id="socialOptions">
+                    <table>
+                        <tr>
+                            <td>
+                                Name: <input id="socialName">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Creation:
+                                <input type="radio" name="socialCreation" value="yes">Yes
+                                <input type="radio" name="socialCreation" value="no">No
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Management:
+                                <input type="radio" name="socialManage" value="yes">Yes
+                                <input type="radio" name="socialManage" value="no">No
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="button" id="cancelAddSocial" value="Cancel" onclick="cancelSocialAdd()"/>
+                                <input type="button" id="addSocial" value="Add Social Media" onclick="addNewSocial()"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <input type="button" id="clear" onclick="clearAll()" value="Clear"/>
+    <button type="submit" id="save">Save</button>
+</form>
+</body>
+</html>
