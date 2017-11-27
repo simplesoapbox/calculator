@@ -39,7 +39,7 @@ function clearRadios(name){
 }
 
 var websites = [];
-var socialMedia = {};
+var socialMedia = [];
 
 function cancelSiteAdd(){
   clearWebsites();
@@ -158,6 +158,14 @@ function cancelSocialAdd(){
 }
 
 function addNewSocial(){
+  var social = {
+    id: guid(),
+    name: $('#socialName').val(),
+    creation: $('input[name=socialCreation]:checked').val(),
+    manage: $('input[name=socialManage]:checked').val()
+  };
+
+  socialMedia.push(social);
 
 }
 
